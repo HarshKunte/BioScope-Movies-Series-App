@@ -51,13 +51,14 @@ function AddToListModal({addListVisible,user, setAddListVisible, lists, selected
   const createList = (e) =>{
     e.preventDefault()
     if(listInput){
+      setListInput("")
     db.collection('users').doc(user).collection("lists").add({
       name: listInput,
       items:[]
     })
     .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
-      setListInput("")
+      
   })
   .catch((error) => {
       console.error("Error adding document: ", error);
@@ -116,7 +117,7 @@ function AddToListModal({addListVisible,user, setAddListVisible, lists, selected
                     }
                   
                   </List>
-            <form noValidate  autoComplete="off" style={{display:'flex',alignItems:'center'}}>
+            <form noValidate onSubmit={createList}  autoComplete="off" style={{display:'flex',alignItems:'center'}}>
 
             <TextField color="secondary" id="standard-basic" value={listInput} label="Create New List" onChange={handleInput} />
             <IconButton onClick={createList} style={{marginTop:'15px'}} color="secondary" aria-label="upload picture" component="span">
