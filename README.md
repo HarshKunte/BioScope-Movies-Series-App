@@ -7,6 +7,7 @@
 - View Movies/Series
 - Search Movies/Series
 - Save Movies/Series to your list
+- Mobile responsive
 
 ## Steps to install
 `npm install`
