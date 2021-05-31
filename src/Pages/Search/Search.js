@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 import SingleContent from "../../components/SingleContent/SingleContent";
+
 import toast from "react-hot-toast";
 
 const Search = ({setSelectedContent,setAddListVisible,user, lists}) => {
@@ -20,6 +21,7 @@ const Search = ({setSelectedContent,setAddListVisible,user, lists}) => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  
 
   const darkTheme = createMuiTheme({
     palette: {
@@ -37,6 +39,7 @@ const Search = ({setSelectedContent,setAddListVisible,user, lists}) => {
           process.env.REACT_APP_API_KEY
         }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
+      
       if(data.results.length===0){
         toast.error('Nothing found!')
       }
@@ -74,6 +77,8 @@ const Search = ({setSelectedContent,setAddListVisible,user, lists}) => {
 
    return inList
   }
+
+ 
 
   return (
     <div>

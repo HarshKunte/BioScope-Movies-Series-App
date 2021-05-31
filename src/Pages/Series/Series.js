@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Genres from "../../components/Genres/Genres";
@@ -11,12 +12,15 @@ const Series = ({setSelectedContent,setAddListVisible,user,lists}) => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [isLoading, setIsLoading] = useState(true)
+
   const genreforURL = useGenre(selectedGenres);
 
   const fetchSeries = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
+    setIsLoading(false)
     setContent(data.results);
     setNumOfPages(data.total_pages);
     // console.log(data);
@@ -47,6 +51,15 @@ const Series = ({setSelectedContent,setAddListVisible,user,lists}) => {
    });
 
    return inList
+  }
+
+  if(isLoading){
+    return (
+      <div style={{width:'100%',height:'100%',display:'flex', justifyContent:'center'}}>
+
+      <CircularProgress style={{marginTop:'4rem'}} color="secondary" />
+      </div>
+    )
   }
 
   return (

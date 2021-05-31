@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -41,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
 
 function MyList({lists, user, setAddListVisible}) {
     const classes = useStyles();
+
+    useEffect(() => {
+      window.scroll(0, 0);
+      
+      // eslint-disable-next-line
+    }, []);
 
     const isAddedToList = (id) =>{
   

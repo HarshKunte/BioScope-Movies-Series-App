@@ -4,6 +4,7 @@ import Genres from "../../components/Genres/Genres";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import useGenre from "../../hooks/useGenre";
 import CustomPagination from "../../components/Pagination/CustomPagination";
+import { CircularProgress } from "@material-ui/core";
 
 const Movies = ({setSelectedContent,setAddListVisible,user, lists}) => {
   const [genres, setGenres] = useState([]);
@@ -12,12 +13,14 @@ const Movies = ({setSelectedContent,setAddListVisible,user, lists}) => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const genreforURL = useGenre(selectedGenres);
+  const [isLoading, setIsLoading] = useState(true)
   // console.log(selectedGenres);
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
+    setIsLoading(false)
     console.log(data);
     setContent(data.results);
     setNumOfPages(data.total_pages);
@@ -48,6 +51,15 @@ const Movies = ({setSelectedContent,setAddListVisible,user, lists}) => {
    });
 
    return inList
+  }
+
+  if(isLoading){
+    return (
+      <div style={{width:'100%',height:'100%',display:'flex', justifyContent:'center'}}>
+
+      <CircularProgress style={{marginTop:'4rem'}} color="secondary" />
+      </div>
+    )
   }
 
   return (

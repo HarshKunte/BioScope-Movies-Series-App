@@ -3,16 +3,19 @@ import "./Trending.css";
 import { useEffect, useState } from "react";
 import SingleContent from "../../components/SingleContent/SingleContent";
 import CustomPagination from "../../components/Pagination/CustomPagination";
+import { CircularProgress } from "@material-ui/core";
 
 const Trending = ({setSelectedContent,setAddListVisible,user, lists}) => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
+
 
   const fetchTrending = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
     );
-
+      setIsLoading(false)
     setContent(data.results);
   };
 
@@ -42,6 +45,15 @@ const Trending = ({setSelectedContent,setAddListVisible,user, lists}) => {
    });
 
    return inList
+  }
+
+  if(isLoading){
+    return (
+      <div style={{width:'100%',height:'100%',display:'flex', justifyContent:'center'}}>
+
+      <CircularProgress style={{marginTop:'4rem'}} color="secondary" />
+      </div>
+    )
   }
 
   return (
