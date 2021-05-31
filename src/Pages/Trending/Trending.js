@@ -31,7 +31,7 @@ const Trending = ({setSelectedContent,setAddListVisible,user, lists}) => {
     let inList= null
    lists.some(list => {
 
-     console.log("loop");
+    
     let arr = list.items.filter(item =>{
       return item.id === id
     });

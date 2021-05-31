@@ -21,7 +21,7 @@ const Movies = ({setSelectedContent,setAddListVisible,user, lists}) => {
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setIsLoading(false)
-    console.log(data);
+   
     setContent(data.results);
     setNumOfPages(data.total_pages);
   };
@@ -37,7 +37,7 @@ const Movies = ({setSelectedContent,setAddListVisible,user, lists}) => {
     let inList= null
    lists.some(list => {
 
-     console.log("loop");
+    
     let arr = list.items.filter(item =>{
       return item.id === id
     });

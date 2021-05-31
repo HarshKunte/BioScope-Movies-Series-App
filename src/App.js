@@ -37,7 +37,7 @@ function App() {
       }
       else
       setUser(null)
-      console.log(user);
+      
     })
   }, [])
 
@@ -49,7 +49,7 @@ function App() {
           const data = {id:doc.id, name:doc.data().name, items:doc.data().items}
           return data
         })
-       console.log(lists);
+       
         setLists(lists)
        
       })
